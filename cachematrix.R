@@ -3,23 +3,18 @@
 ## This function creates a special "matrix" object that can cache its inverse.
 
 makeCacheMatrix <- function(x = matrix()) {
-    ## m <- NULL
-    s <- NULL
+    
+    s <- NULL                                 ## s is the inverse of matrix; set to NULL
     set <- function(y){
             x <<- y
-            
-            ## m <<- NULL
             s <<- NULL
     }
-    get <- function() x
+    get <- function() x                       ## get the matrix object "x"   
     
-    ## setmean <- function(mean) m <<- mean
-    setinv <- function(solve) s <<- solve
+    setinv <- function(inverse) s <<- inverse ## use the inverse function to set the inverse matrix to s
     
-    ## getmean <- function() m
-    getinv <- function() s
+    getinv <- function() s                    ## get the inverse matrix s
     
-    ## list(set = set, get = get, setmean = setmean, getmean = getmean)
     list(set = set, get = get, setinv = setinv, getinv = getinv)
 }
 
@@ -31,25 +26,19 @@ makeCacheMatrix <- function(x = matrix()) {
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
   
-        ## m <- x$getmean()
-        s <- x$getinv()
+        s <- x$getinv()              ## get the inverse matrix to s  
         
-        ## if(!is.null(m)){
-        if(!is.null(s)){
+        if(!is.null(s)){             ## check for the s value
           
-              message("getting cached data")
+              message("getting cached data") ## will be printed if we have the data
           
-              ## return(m)
-              return(s)
+              return(s)                     ## inverse matrix s will be returned
         }
-        data <- x$get()
+        data <- x$get()                     ## matrix object will be put into data  
         
-        ## m <- mean(data,...)
-        s <- solve(data,...)
+        s <- solve(data,...)                ## inverse matrix will be put into s
         
-        ## x$setmean(m)
-        x$setinv(s)
+        x$setinv(s)                         
         
-        ## m
-        s
+        s                                   ## inverse matrix will be returned
 }
