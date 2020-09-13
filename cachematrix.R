@@ -32,7 +32,7 @@ cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
   
         ## m <- x$getmean()
-        s <- x$getmean()
+        s <- x$getinv()
         
         ## if(!is.null(m)){
         if(!is.null(s)){
@@ -45,10 +45,10 @@ cacheSolve <- function(x, ...) {
         data <- x$get()
         
         ## m <- mean(data,...)
-        s <- mean(data,...)
+        s <- solve(data,...)
         
         ## x$setmean(m)
-        x$setmean(s)
+        x$setinv(s)
         
         ## m
         s
